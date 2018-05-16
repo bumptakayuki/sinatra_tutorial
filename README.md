@@ -1,5 +1,7 @@
 # sinatra_tutorial
 
+<img width="1261" alt="2018-05-16 16 53 29" src="https://user-images.githubusercontent.com/12216342/40132412-ab6dc16a-5977-11e8-8df4-182dab5b3d8a.png">
+
 ## 初期化
 ```
 $ bundle install
