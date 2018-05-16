@@ -95,7 +95,7 @@ put '/edit/:id' do
   end
 
   query = 'UPDATE posts SET title=?, description=?, image_path=?, updated_at=CURRENT_TIMESTAMP() WHERE id = ?'
-  client.xquery(query, params[:title], params[:description], "/img/#{@filename}",params[:id])
+  client.xquery(query, params[:title], params[:description], "/img/#{@filename}", params[:id])
 
   redirect to('/')
 end
