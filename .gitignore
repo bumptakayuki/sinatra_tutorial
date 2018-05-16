@@ -1,0 +1,5 @@
+.idea
+.bundle
+.DS_store
+config/database.yml
+Gemfile.lock
