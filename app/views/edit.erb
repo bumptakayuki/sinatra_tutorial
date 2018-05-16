@@ -1,0 +1,19 @@
+
+<main class="main-wrapper" id="container">
+  <div class="wrapper">
+
+    <form action="/edit/<%=@post['id'] %>" method="post" enctype="multipart/form-data">
+      <label>タイトル</label>
+      <input type="hidden" name="_method" value="put">
+      <input type="hidden" class="form-control" value="<%= @post['id'] %>" name="id">
+      <input type="text" class="form-control" value="<%= @post['title'] %>" name="title">
+      <label>説明</label>
+      <textarea class="form-control" name="description"><%= @post['description'] %></textarea>
+      <label>メイン画像</label>
+      <input type="file" class="form-control" value="<%= @post['image_path'] %>"  name="file">
+      <input type="submit" value="Add comment">
+    </form>
+  </div>
+</main>
+
+<!-- Image Gallery -->

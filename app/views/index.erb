@@ -1,0 +1,38 @@
+
+<main class="main-wrapper" id="container">
+
+  <!-- image Gallery -->
+
+  <div class="wrapper">
+    <div class="">
+      <ul class="small-block-grid-2 medium-block-grid-3 large-block-grid-3 masonry">
+        <% @posts.each do |post| %>
+        <li class="masonry-item grid">
+          <figure class="effect-sarah"> <img src="<%= post['image_path'] %>" />
+            <figcaption>
+              <h2><%= Rack::Utils.escape_html(post['title']) %></h2>
+              <p><%= Rack::Utils.escape_html(post['description']) %></p>
+              <p>
+                <span><i class="fas fa-heart"></i>　16</span>
+                <span><i class="fas fa-comment"></i>　1</span>
+              </p>
+              <a href="/show/<%= post['id'] %>">View more</a> </figcaption>
+
+          </figure>
+          <form action="/destroy/<%= post['id'] %>" method="post" style="display: inline; float: left">
+            <input type="hidden" name="_method" value="delete">
+            <button type="submit" class="btn btn-primary btn-sm"><i class="far fa-trash-alt"
+                                                                    onClick="return confirm('削除します。\nよろしいですか？');"></i></button>
+          </form>
+          <a href="/edit/<%= post['id'] %>" style="display: inline; float: left">
+            <button type="button" class="btn btn-success btn-sm"><i class="fas fa-edit"></i></button>
+          </a>
+        </li>
+        <% end %>
+
+      </ul>
+    </div>
+  </div>
+</main>
+
+<!-- Image Gallery -->

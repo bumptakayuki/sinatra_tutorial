@@ -1,0 +1,31 @@
+
+
+<!-- main-wrapper-inner -->
+<main class="main-wrapper-inner" id="container">
+  <div class="container">
+    <div class="wrapper-inner">
+      <!-- details-image -->
+      <figure class="details-image">
+        <img src="<%= @post['image_path'] %>" alt="" class="img-responsive"/>
+      </figure>
+      <!-- details-image -->
+      <!-- content -->
+      <div class="details-content">
+        <!-- left -->
+        <section class="inner-left">
+          <header>
+            <h2><%= @post['title'] %></h2>
+          </header>
+        </section>
+        <!-- left -->
+        <!-- right -->
+        <section class="inner-right">
+          <p><%= @post['description'] %></p>
+        </section>
+        <!-- right -->
+      </div>
+      <!-- content -->
+
+    </div>
+  </div>
+</main>
