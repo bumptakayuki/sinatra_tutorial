@@ -21,3 +21,69 @@ INSERT INTO posts (title,description,image_path,created_at,updated_at) VALUES ('
 INSERT INTO posts (title,description,image_path,created_at,updated_at) VALUES ('沖縄の中華料理屋',   '沖縄の中華料理屋に来ました！#okinawa #koza','/img/2.jpg',current_timestamp,current_timestamp);
 INSERT INTO posts (title,description,image_path,created_at,updated_at) VALUES ('沖縄のフランス料理屋',   '沖縄のフランス料理屋に来ました！#okinawa #koza','/img/3.jpg',current_timestamp,current_timestamp);
 ```
+
+
+# routing Example
+# 通常
+
+```ruby
+get '/' do
+  "hello world again"
+end
+```
+
+# 通常
+
+```ruby
+get '/hello/:name' do
+  "hello #{params[:name]}"
+end
+```
+
+# 単一パラメータ (params[]省略)
+
+```ruby
+get '/hello/:name' do |name|
+  "hello #{name}"
+end
+``` 
+
+# 複数パラメータ (params[]省略)
+
+```ruby
+get '/hello/:fname/:lname' do |f, l|
+  "hello #{f} #{l}"
+end
+``` 
+
+# 複数パラメータ (オプショナル有り)
+
+```ruby
+get '/hello/:fname/?:lname?' do |f, l|
+  "hello #{f} #{l}"
+end
+```
+
+# ワイルドカード
+
+```ruby
+get '/hello/*/*' do |f, l|
+  "hello #{f} #{l}"
+end
+```
+
+# ワイルドカード
+
+```ruby
+get '/hello/*/*' do
+  "hello #{params[:splat][0]} #{params[:splat][1]}"
+end
+```
+
+# 正規表現
+
+```ruby
+get %r{/users/([0-9]*)} do
+  "user id = #{params[:captures][0]}"
+end
+```

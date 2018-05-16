@@ -99,3 +99,45 @@ put '/edit/:id' do
 
   redirect to('/')
 end
+
+
+# routing Example
+# 通常
+# get '/' do
+#   "hello world again"
+# end
+
+# 通常
+# get '/hello/:name' do
+#   "hello #{params[:name]}"
+# end
+
+# 単一パラメータ (params[]省略)
+# get '/hello/:name' do |name|
+#   "hello #{name}"
+# end
+
+# 複数パラメータ (params[]省略)
+# get '/hello/:fname/:lname' do |f, l|
+#   "hello #{f} #{l}"
+# end
+
+# 複数パラメータ (オプショナル有り)
+# get '/hello/:fname/?:lname?' do |f, l|
+#   "hello #{f} #{l}"
+# end
+
+# ワイルドカード
+# get '/hello/*/*' do |f, l|
+#   "hello #{f} #{l}"
+# end
+
+# ワイルドカード
+# get '/hello/*/*' do
+#   "hello #{params[:splat][0]} #{params[:splat][1]}"
+# end
+
+# 正規表現
+# get %r{/users/([0-9]*)} do
+#   "user id = #{params[:captures][0]}"
+# end
