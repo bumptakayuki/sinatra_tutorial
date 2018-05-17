@@ -1,4 +1,4 @@
-<main class="main-wrapper" id="container">
+<main class="main-wrapper" id="container" style="height: 500px">
   <div class="wrapper">
     <form action="/create" method="post" enctype="multipart/form-data">
       <label>タイトル</label>
@@ -7,8 +7,9 @@
       <textarea class="form-control" name="description"></textarea>
       <label>メイン画像</label>
       <input type="file" class="form-control" name="file">
-
-      <input type="submit" value="Add comment">
+      <button type="submit" class="btn btn-success btn">投稿</button>
+      <hr>
+      <div class="preview" />
     </form>
   </div>
 </main>

@@ -1,5 +1,4 @@
-
-<main class="main-wrapper" id="container">
+<main class="main-wrapper" id="container" style="height: 500px">
   <div class="wrapper">
 
     <form action="/edit/<%=@post['id'] %>" method="post" enctype="multipart/form-data">
@@ -11,7 +10,9 @@
       <textarea class="form-control" name="description"><%= @post['description'] %></textarea>
       <label>メイン画像</label>
       <input type="file" class="form-control" value="<%= @post['image_path'] %>"  name="file">
-      <input type="submit" value="Add comment">
+      <button type="submit" class="btn btn-success btn">投稿</button>
+      <hr>
+      <div class="preview" />
     </form>
   </div>
 </main>
