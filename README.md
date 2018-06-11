@@ -10,6 +10,14 @@ $ bundle install
 ## SQL
 
 ```
+CREATE TABLE users (
+id INT( 5 ) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+name VARCHAR( 25 ) NOT NULL ,
+email VARCHAR( 35 ) NOT NULL ,
+password VARCHAR( 60 ) NOT NULL ,
+UNIQUE (email)
+);
+
 CREATE TABLE posts (
   id SERIAL PRIMARY KEY,
   title varchar(255),
@@ -48,7 +56,7 @@ end
 get '/hello/:name' do |name|
   "hello #{name}"
 end
-``` 
+```
 
 # 複数パラメータ (params[]省略)
 
@@ -56,7 +64,7 @@ end
 get '/hello/:fname/:lname' do |f, l|
   "hello #{f} #{l}"
 end
-``` 
+```
 
 # 複数パラメータ (オプショナル有り)
 

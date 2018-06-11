@@ -3,8 +3,11 @@ require 'sinatra/reloader'
 require 'sinatra/flash'
 require 'mysql2'
 require 'mysql2-cs-bind'
+require 'pry'
 
 enable :sessions
+
+set :public_folder, File.dirname(__FILE__) + '/public'
 
 # Mysqlドライバの設定
 client = Mysql2::Client.new(
@@ -21,8 +24,22 @@ configure do
   set :views, 'app/views'
 end
 
+def check_user
+  if session[:user_id].nil?
+    redirect '/login'
+  end
+end
+
+def set_user
+  return nil if session[:user_id].nil?
+  @user = client.xquery("SELECT * From users WHERE id = ?", session[:user_id]).to_a.first
+end
+
 # トップページ
 get '/' do
+
+  # set_user
+  check_user
   @posts = client.xquery("SELECT * FROM posts")
 
   # デバッグ例
@@ -35,6 +52,7 @@ end
 
 # 投稿詳細
 get '/show/:id' do
+  check_user
   @post = client.xquery('SELECT * FROM posts WHERE id = ?', params[:id]).first
   erb :show
 end
@@ -100,14 +118,62 @@ put '/edit/:id' do
   redirect to('/')
 end
 
+def login?
+  !session[:user_id].nil?
+end
+
+get '/signup' do
+  redirect '/' if login?
+
+  erb :signup
+end
+
+post '/signup' do
+  redirect '/' if login?
+
+  name = params[:name]
+  email = params[:email]
+  password = params[:password]
+
+  client.xquery('INSERT INTO users (name, email, password) VALUES (?,?,?)', name, email, password)
+  session[:user_id] = client.last_id
+
+  redirect '/'
+end
+
+get '/login' do
+  redirect '/' if login?
+
+  erb :login
+end
+
+post '/login' do
+  email = params[:email]
+  password = params[:password]
+
+  user = client.xquery("SELECT * FROM users where email = ? and password = ?",email, password).to_a.first
+  if user
+    session[:user_id] = user['id']
+    # binding.pry
+
+    redirect '/'
+  else
+    erb :login
+  end
+end
+
+get '/logout' do
+  session[:user_id] = nil
+  redirect '/'
+end
 
 # routing Example
 # 通常
 # get '/' do
 #   "hello world again"
 # end
-
-# 通常
+#
+# # 通常
 # get '/hello/:name' do
 #   "hello #{params[:name]}"
 # end
