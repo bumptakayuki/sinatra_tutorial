@@ -30,7 +30,7 @@ def check_user
   end
 end
 
-def set_user
+def set_user(client)
   return nil if session[:user_id].nil?
   @user = client.xquery("SELECT * From users WHERE id = ?", session[:user_id]).to_a.first
 end
@@ -38,7 +38,7 @@ end
 # トップページ
 get '/' do
 
-  # set_user
+  set_user(client)
   check_user
   @posts = client.xquery("SELECT * FROM posts")
 
@@ -53,18 +53,21 @@ end
 # 投稿詳細
 get '/show/:id' do
   check_user
+  set_user(client)
   @post = client.xquery('SELECT * FROM posts WHERE id = ?', params[:id]).first
   erb :show
 end
 
 # 新規作成(GET)
 get '/create' do
+  set_user(client)
   erb :create
 end
 
 # 新規作成(POST)
 post '/create' do
 
+  set_user(client)
   # 画像情報を取得
   @filename = params[:file][:filename]
   file = params[:file][:tempfile]
@@ -94,6 +97,8 @@ end
 
 # 編集(GET)
 get '/edit/:id' do
+
+  set_user(client)
   # @post = Post.find(params[:id])
   @post = client.xquery('SELECT * FROM posts WHERE id = ?', params[:id]).first
 
